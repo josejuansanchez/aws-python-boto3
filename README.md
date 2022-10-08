@@ -47,3 +47,8 @@ Editamos el archivo de configuración de AWS, para indicar la región y el forma
 region = us-east-1
 output = json
 ```
+
+## Referencias
+
+- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#securitygroup
+- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#instance
