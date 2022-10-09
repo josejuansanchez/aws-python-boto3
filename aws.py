@@ -5,6 +5,47 @@ class ec2:
   def __init__(self):
     self.ec2 = boto3.resource('ec2')
 
+
+  """
+  List all VPCs
+  """
+  def list_vpcs(self):
+    for vpc in self.ec2.vpcs.all():
+      print(vpc)
+      print(f"id: {vpc.id}")
+      print(f"cidr_block: {vpc.cidr_block}")
+      print(f"cidr_block_association_set: {vpc.cidr_block_association_set}")
+      print(f"dhcp_options_id: {vpc.dhcp_options_id}")
+      print(f"instance_tenancy: {vpc.instance_tenancy}")
+      print(f"ipv6_cidr_block_association_set: {vpc.ipv6_cidr_block_association_set}")
+      print(f"is_default: {vpc.is_default}")
+      print(f"owner_id: {vpc.owner_id}")
+      print(f"state: {vpc.state}")
+      print(f"tags: {vpc.tags}")
+      print(f"vpc_id: {vpc.vpc_id}")
+  
+
+  """
+  Returns default VPC id
+  """
+  def get_default_vpc_id(self):
+    for vpc in self.ec2.vpcs.all():
+      if vpc.is_default == True:
+        return vpc.id
+
+  """
+  Create a security group
+  """
+  def create_security_group(self, group_name, description, vpc_id):
+    try:
+      sg = self.ec2.create_security_group(GroupName=group_name, Description=description, VpcId=vpc_id)
+      #sg = self.ec2.create_security_group(GroupName=group_name, Description=description, VpcId=vpc_id, TagSpecifications=tags)
+      sg.authorize_ingress(CidrIp='0.0.0.0/0', IpProtocol='tcp', FromPort=22, ToPort=22)
+      sg.authorize_ingress(CidrIp='0.0.0.0/0', IpProtocol='tcp', FromPort=80, ToPort=80)
+      sg.authorize_ingress(CidrIp='0.0.0.0/0', IpProtocol='tcp', FromPort=443, ToPort=443)
+    except botocore.exceptions.ClientError as error:
+      print(error)
+
   """
   List all security groups
   """
@@ -31,6 +72,7 @@ class ec2:
       if i.state['Name'] == 'stopped':
         i.start()
         print(f"Starting instance: {i.id} \t Name: {i.tags[0]['Value']}")
+  
   """
   Stop all EC2 instances
   """
@@ -97,22 +139,29 @@ class ec2:
 
 if __name__ == "__main__":
     ec2 = ec2()
-    ec2.list_security_groups()
+    
+    #ec2.list_vpcs()
+    #vpc_id = ec2.get_default_vpc_id()
 
-    ec2.list_instances()
+    #ec2.list_security_groups()
+    #ec2.create_security_group("sg_test_1", "Esto es una prueba", vpc_id)
+    #ec2.list_security_groups()
+
+    #ec2.list_instances()
     #ec2.stop_instances()
     #ec2.start_instances()
 
-    ec2.create_instance("ami-08c40ec9ead489470", 1, "t2.micro", "vockey", "boto3-test-a")
+    #ec2.create_instance("ami-08c40ec9ead489470", 1, "t2.micro", "vockey", "boto3-test-a")
 
-    ec2.stop_instance("i-09046bf56dc0c4e05")
-    ec2.stop_instance("i-0e8ec3490c4203c26")
-    ec2.stop_instance("i-0f1d960adbdeded31")
-    ec2.stop_instance("i-07ddba56ac71a5ba4")
-    ec2.stop_instance("i-0fffdd7ad1be1c1c5")
+    #ec2.stop_instance("i-09046bf56dc0c4e05")
+    #ec2.stop_instance("i-0e8ec3490c4203c26")
+    #ec2.stop_instance("i-0f1d960adbdeded31")
+    #ec2.stop_instance("i-07ddba56ac71a5ba4")
+    #ec2.stop_instance("i-0fffdd7ad1be1c1c5")
 
-    ec2.terminate_instance("i-09046bf56dc0c4e05")
-    ec2.terminate_instance("i-0e8ec3490c4203c26")
-    ec2.terminate_instance("i-0f1d960adbdeded31")
-    ec2.terminate_instance("i-07ddba56ac71a5ba4")
-    ec2.terminate_instance("i-0fffdd7ad1be1c1c5")
+    #ec2.terminate_instance("i-09046bf56dc0c4e05")
+    #ec2.terminate_instance("i-0e8ec3490c4203c26")
+    #ec2.terminate_instance("i-0f1d960adbdeded31")
+    #ec2.terminate_instance("i-07ddba56ac71a5ba4")
+    #ec2.terminate_instance("i-0fffdd7ad1be1c1c5")
+
