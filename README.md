@@ -78,10 +78,11 @@ output = json
 
 ## Referencias
 
-- https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
-- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#securitygroup
-- https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#instance
-- https://www.learnaws.org/2021/02/24/boto3-resource-client/
+- [Documentación oficial de Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html).
+- [Documentación de `SecurityGroup` en Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#securitygroup).
+- [Documentación de `Instance` en Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#instance).
+- [Boto 3: Resource vs Client](https://www.learnaws.org/2021/02/24/boto3-resource-client/). Learn AWS.
+- [Python examples on AWS (Amazon Web Services) using AWS SDK for Python (Boto3)](https://github.com/alfonsof/aws-python-examples). Alfonso Fernandez-Barandiaran.
 
 [1]: https://aws.amazon.com/es/sdk-for-python/
 [2]: https://aws.amazon.com/es/training/awsacademy/
