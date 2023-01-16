@@ -1,14 +1,5 @@
 import boto3
 
-# resource vs client
-#
-# resource: Devuelve una estructura de datos (high-level interface)
-# client: Devuelve un JSON (low-level interface)
-#
-# Referencia:
-# - https://www.learnaws.org/2021/02/24/boto3-resource-client/
-
-
 def list_instances():
   client = boto3.client('ec2')
   response = client.describe_instances()
