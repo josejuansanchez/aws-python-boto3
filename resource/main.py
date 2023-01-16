@@ -76,6 +76,4 @@ def main():
             print('Invalid option')
 
 if __name__ == "__main__":
-    #main()
-    aws_object = AWS()
-    aws_object.allocate_elastic_ip()
+    main()
