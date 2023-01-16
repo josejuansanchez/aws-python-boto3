@@ -46,7 +46,6 @@ def list_amis(name, architecture, owner_alias):
 
   for ami in response['Images']:
     try:
-      #print(ami)
       print(f"ImageId: \t {ami['ImageId']}")
       print(f"Architecture: \t {ami['Architecture']}")
       print(f"Hypervisor: \t {ami['Hypervisor']}")
