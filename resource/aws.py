@@ -233,3 +233,29 @@ class AWS:
     for i in self.ec2.instances.all():
       if i.tags[0]['Value'] == instance_name:
         return i.id
+
+  """
+  Allocate an elastic IP
+  """
+  def allocate_elastic_ip(self):
+    response = self.ec2.meta.client.allocate_address()
+    print(f"The elastic IP {response['PublicIp']} has been allocated")
+    return response['PublicIp']
+
+  """
+  Get the allocation id of an elastic IP
+  """
+  def get_allocation_id(self, public_ip):
+    addresses = self.ec2.meta.client.describe_addresses(PublicIps=[public_ip])
+    if addresses['Addresses']:
+        return addresses['Addresses'][0]['AllocationId']
+    else:
+        return None
+
+  """
+  Associate an elastic IP to an instance
+  """
+  def associate_elastic_ip(self, public_ip, instance_id):
+    allocation_id = self.get_allocation_id(public_ip)
+    self.ec2.meta.client.associate_address(AllocationId=allocation_id, InstanceId=instance_id)
+    print(f"The elastic IP {public_ip} has been associated to the instance {instance_id}")
