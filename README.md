@@ -76,6 +76,14 @@ region = us-east-1
 output = json
 ```
 
+## Ejemplos
+
+- Ejemplos utilizando `boto3.resource`.
+  - [Ejemplo 01](resource/ejemplo-01/). Utilizando programación estructurada.
+  - [Ejemplo 02](resource/ejemplo-02/). Utilizando programación orientada a objetos.
+- Ejemplos utilizando `boto3.client`.
+  - [Ejemplo 01](client)
+
 ## Referencias
 
 - [Documentación oficial de Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html).
