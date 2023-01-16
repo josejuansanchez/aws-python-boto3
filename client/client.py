@@ -1,21 +1,39 @@
 import boto3
 
+"""
+List all security groups
+"""
+def list_security_groups():
+    ec2_client = boto3.client('ec2')
+    response = ec2_client.describe_security_groups()
+
+    for sg in response['SecurityGroups']:
+      print(f"group_id: {sg.get('GroupId')} \t group_name: {sg.get('GroupName')} \t description: {sg.get('Description')}")
+      for rule in sg.get('IpPermissions'):
+        print(rule)
+      print()
+
+"""
+List EC2 instances
+"""
 def list_instances():
-  client = boto3.client('ec2')
-  response = client.describe_instances()
-  #print(response)
+    client = boto3.client('ec2')
+    response = client.describe_instances()
 
-  for r in response['Reservations']:
-    #print(f"{r['Instances'][0]}")
-    print(f"{r['Instances'][0]['InstanceId']}")
-    print(f"{r['Instances'][0]['InstanceType']}")
-    print(f"{r['Instances'][0]['KeyName']}")
-    print(f"{r['Instances'][0]['PrivateIpAddress']}")
-    print(f"{r['Instances'][0]['PublicIpAddress']}")
-    print(f"{r['Instances'][0]['State']}")
-    print(f"{r['Instances'][0]['Tags']}")
-    print()
+    for reservation in response['Reservations']:
+        for instance in reservation['Instances']:
+            print(f"InstanceId: {instance['InstanceId']}")
+            print(f"InstanceType: {instance['InstanceType']}")
+            print(f"KeyName: {instance['KeyName']}")
+            print(f"PrivateIpAddress: {instance['PrivateIpAddress']}")
+            print(f"PublicIpAddress: {instance['PublicIpAddress']}")
+            print(f"State: {instance['State']}")
+            print(f"Tags: {instance['Tags']}")
+            print()
 
+"""
+List AMIs
+"""
 def list_amis(name, architecture, owner_alias):
   client = boto3.client('ec2')
 
@@ -42,8 +60,8 @@ def list_amis(name, architecture, owner_alias):
       print()
       pass
 
-
 if __name__ == "__main__":
-    #list_instances()
-    list_amis(name="*ubuntu*22.04*", architecture="x86_64", owner_alias="amazon")
-    list_amis(name="*debian*", architecture="x86_64", owner_alias="amazon")
+  list_security_groups()
+  list_instances()
+  list_amis(name="*ubuntu*22.04*", architecture="x86_64", owner_alias="amazon")
+  #list_amis(name="*debian*", architecture="x86_64", owner_alias="amazon")
