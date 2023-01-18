@@ -227,7 +227,7 @@ def terminate_instance(instance_name):
 """
 Create a new EC2 instance
 """
-def create_instance(image_id, max_count, instance_type, key_name, instance_name):
+def create_instance(image_id, max_count, instance_type, key_name, instance_name, security_group_name):
   # Create a boto3 resource instance
   ec2 = boto3.resource('ec2')
 
@@ -237,6 +237,7 @@ def create_instance(image_id, max_count, instance_type, key_name, instance_name)
     MinCount = 1,
     MaxCount = max_count,
     InstanceType = instance_type,
+    SecurityGroups = [ security_group_name ],
     KeyName = key_name,
     TagSpecifications=[{
       'ResourceType': 'instance',

@@ -208,12 +208,13 @@ class AWS:
   """
   Create a new EC2 instance
   """
-  def create_instance(self, image_id, max_count, instance_type, key_name, instance_name):
+  def create_instance(self, image_id, max_count, instance_type, key_name, instance_name, security_group_name):
     instance = self.ec2.create_instances(
       ImageId = image_id,
       MinCount = 1,
       MaxCount = max_count,
       InstanceType = instance_type,
+      SecurityGroups = [ security_group_name ],
       KeyName = key_name,
       TagSpecifications=[{
         'ResourceType': 'instance',
