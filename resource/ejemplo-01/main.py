@@ -38,27 +38,28 @@ def main():
         show_menu()
         option = int(input('\nSelect an option (1-12): '))
         if option == 1:
-            name = input('Security group name: ')
-            description = input('Security group description: ')
-            aws.create_security_group(name, description, ingress_permissions)
+            sg_name = input('Security group name: ')
+            sg_description = input('Security group description: ')
+            aws.create_security_group(sg_name, sg_description, ingress_permissions)
         elif option == 2:
-            name = input('Security group name: ')
-            aws.delete_security_group(name)
+            sg_name = input('Security group name: ')
+            aws.delete_security_group(sg_name)
         elif option == 3:
             aws.list_security_groups()
         elif option == 4:
+            instance_name = input('Instance name: ')
             min_count = int(input('Min count: '))
-            security_group = input('Security group: ')
-            aws.create_instance(ami, min_count, instance_type, key_name, security_group)
+            sg_name = input('Security group: ')
+            aws.create_instance(ami, min_count, instance_type, key_name, instance_name, sg_name)
         elif option == 5:
-            name = input('Instance name: ')
-            aws.start_instance(name)
+            instance_name = input('Instance name: ')
+            aws.start_instance(instance_name)
         elif option == 6:
-            name = input('Instance name: ')
-            aws.stop_instance(name)
+            instance_name = input('Instance name: ')
+            aws.stop_instance(instance_name)
         elif option == 7:
-            name = input('Instance name: ')
-            aws.terminate_instance(name)
+            instance_name = input('Instance name: ')
+            aws.terminate_instance(instance_name)
         elif option == 8:
             aws.list_instances()
         elif option == 9:
