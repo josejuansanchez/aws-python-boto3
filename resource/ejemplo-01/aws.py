@@ -284,6 +284,10 @@ Associate an elastic IP to an instance
 """
 def associate_elastic_ip(public_ip, instance_id):
   ec2 = boto3.resource('ec2')
+  
+  print('Waiting until the instance is running...')
+  ec2.Instance(instance_id).wait_until_running()
+
   allocation_id = get_allocation_id(public_ip)
   ec2.meta.client.associate_address(AllocationId=allocation_id, InstanceId=instance_id)
   print(f"The elastic IP {public_ip} has been associated to the instance {instance_id}")
