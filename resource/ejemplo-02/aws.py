@@ -6,32 +6,6 @@ class AWS:
     self.ec2 = boto3.resource('ec2')
 
   """
-  List all VPCs
-  """
-  def list_vpcs(self):
-    for vpc in self.ec2.vpcs.all():
-      print(vpc)
-      print(f"id: {vpc.id}")
-      print(f"cidr_block: {vpc.cidr_block}")
-      print(f"cidr_block_association_set: {vpc.cidr_block_association_set}")
-      print(f"dhcp_options_id: {vpc.dhcp_options_id}")
-      print(f"instance_tenancy: {vpc.instance_tenancy}")
-      print(f"ipv6_cidr_block_association_set: {vpc.ipv6_cidr_block_association_set}")
-      print(f"is_default: {vpc.is_default}")
-      print(f"owner_id: {vpc.owner_id}")
-      print(f"state: {vpc.state}")
-      print(f"tags: {vpc.tags}")
-      print(f"vpc_id: {vpc.vpc_id}")
-  
-  """
-  Returns default VPC id
-  """
-  def get_default_vpc_id(self):
-    for vpc in self.ec2.vpcs.all():
-      if vpc.is_default == True:
-        return vpc.id
-
-  """
   Create a security group
   """
   def create_security_group(self, group_name, description, ingress_permissions):
@@ -80,6 +54,16 @@ class AWS:
     for sg in self.ec2.security_groups.all():
       if sg.group_name == group_name:
         return sg.group_id
+
+  """
+  Check if security group exists
+  """
+  def security_group_exists(self, group_name):
+    self.ec2 = boto3.resource('ec2')
+    for sg in self.ec2.security_groups.all():
+      if sg.group_name == group_name:
+        return True
+    return False
 
   """
   List EC2 instances
@@ -236,6 +220,13 @@ class AWS:
         return i.id
 
   """
+  Get the public IP of an instance
+  """
+  def get_instance_public_ip(self, instance_id):
+    instance = self.ec2.Instance(instance_id)
+    return instance.public_ip_address
+
+  """
   Allocate an elastic IP
   """
   def allocate_elastic_ip(self):
@@ -263,3 +254,12 @@ class AWS:
     allocation_id = self.get_allocation_id(public_ip)
     self.ec2.meta.client.associate_address(AllocationId=allocation_id, InstanceId=instance_id)
     print(f"The elastic IP {public_ip} has been associated to the instance {instance_id}")
+
+  """
+  Release an elastic IP
+  """
+  def release_elastic_ip(self, public_ip):
+      allocation_id = self.get_allocation_id(public_ip)
+      address = self.ec2.VpcAddress(allocation_id)
+      address.release()
+      print(f"The elastic IP {public_ip} has been released")
