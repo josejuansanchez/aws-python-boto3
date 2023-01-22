@@ -78,11 +78,34 @@ output = json
 
 ## Ejemplos
 
-- Ejemplos utilizando `boto3.resource`.
-  - [Ejemplo 01](resource/ejemplo-01/). Utilizando programación estructurada.
-  - [Ejemplo 02](resource/ejemplo-02/). Utilizando programación orientada a objetos.
+Los ejemplos de este repositorio importan un paquete llamado `common` que contiene dos módulos donde se han implementado algunas funciones para interaccionar con los servicios de AWS.
+
+Cada uno de los módulos utiliza un enfoque diferente, uno utiliza programación estructurada y el otro programación oriendata a objetos.
+
+- Paquete `commons`.
+  - `aws_resource_functions.py`. Módulo basado en programación estructurada.
+  - `aws_resource_class.py`. Módulo basado en programación orientada a objetos.
+
+- Ejemplos utilizando `boto3.resource` utilizando programación estructurada.
+  - [Ejemplo 01](ejemplos/ejemplo-01.py). Crear un grupo de seguridad.
+  - [Ejemplo 02](ejemplos/ejemplo-02.py). Eliminar un grupo de seguridad.
+  - [Ejemplo 03](ejemplos/ejemplo-03.py). Crear una instancia EC2.
+  - [Ejemplo 04](ejemplos/ejemplo-04.py). Eliminar una instancia EC2.
+  - [Ejemplo 05](ejemplos/ejemplo-05.py). Reservar una IP elástica y asociarla a una instancia EC2.
+  - [Ejemplo 06](ejemplos/ejemplo-06.py). Liberar una IP elástica.
+  - [Ejemplo 07](ejemplos/ejemplo-07.py). Menú con funcionalidades.
+
+- Ejemplos utilizando `boto3.resource` utilizando programación orientada a objetos.
+  - [Ejemplo 08](ejemplos/ejemplo-08.py). Crear un grupo de seguridad.
+  - [Ejemplo 09](ejemplos/ejemplo-09.py). Eliminar un grupo de seguridad.
+  - [Ejemplo 10](ejemplos/ejemplo-10.py). Crear una instancia EC2.
+  - [Ejemplo 11](ejemplos/ejemplo-11.py). Eliminar una instancia EC2.
+  - [Ejemplo 12](ejemplos/ejemplo-12.py). Reservar una IP elástica y asociarla a una instancia EC2.
+  - [Ejemplo 13](ejemplos/ejemplo-13.py). Liberar una IP elástica.
+  - [Ejemplo 14](ejemplos/ejemplo-14.py). Menú con funcionalidades.
+
 - Ejemplos utilizando `boto3.client`.
-  - [Ejemplo 01](client)
+  - [Ejemplo 15](ejemplos/ejemplo-15.py)
 
 ## Ejercicios
 
@@ -96,21 +119,21 @@ Añada las siguientes reglas al grupo de seguridad:
 ### Ejercicio 2
 
 Escriba un script de Python para crear una instancia EC2 que tengas las siguientes características.
-- Identificador de la AMI: ami-08e637cea2f053dfa. Esta AMI se corresponde con la imagen Red Hat Enterprise Linux 9 (HVM).
-- Número de instancias: 1
-- Tipo de instancia: t2.micro
-- Clave privada: vockey
-- Grupo de seguridad: backend-sg
-- Nombre de la instancia: backend
+- Identificador de la AMI: `ami-08e637cea2f053dfa`. Esta AMI se corresponde con la imagen Red Hat Enterprise Linux 9 (HVM).
+- Número de instancias: `1`
+- Tipo de instancia: `t2.micro`
+- Clave privada: `vockey`
+- Grupo de seguridad: `backend-sg`
+- Nombre de la instancia: `backend`
 
 ### Ejercicio 3
 
-- Crea un script para crear la infraestructura de la práctica 9.
-- Crea un script para eliminar la infraestructura de la práctica 9.
+- Crea un script para crear la infraestructura de la **práctica 9**.
+- Crea un script para eliminar la infraestructura de la **práctica 9**.
 
 ### Ejercicio 4
 
-Modifique los ejemplos 01 y 02 de este repositorio que utilizan `boto3.resource`, para añadir una nueva opción al menu del archivo `main.py` que permita crear una dirección IP elástica y asociarla a una instancia EC2. El usuario tendrá que introducir el nombre de la instancia por teclado.
+Modifique los ejemplos 7 y 14 de este repositorio que utilizan `boto3.resource`, para añadir una nuevas funcionalidades. Por ejemplo, a la hora de crear una nueva instancia EC2 el programa puede mostrar al usuario una lista de AMIs disponibles y una lista de tipos de instancia.
 
 ## Referencias
 
