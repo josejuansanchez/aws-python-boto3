@@ -22,7 +22,7 @@ def show_menu():
 
 def main():  
     # Create an object of the AWS class
-    aws_object = AWS()
+    aws = AWS()
 
     # Security group ingress permissions
     ingress_permissions = [
@@ -47,12 +47,12 @@ def main():
         if option == 1:
             sg_name = input('Security group name: ')
             sg_description = input('Security group description: ')
-            aws_object.create_security_group(sg_name, sg_description, ingress_permissions)
+            aws.create_security_group(sg_name, sg_description, ingress_permissions)
         elif option == 2:
             sg_name = input('Security group name: ')
-            aws_object.delete_security_group(sg_name)
+            aws.delete_security_group(sg_name)
         elif option == 3:
-            aws_object.list_security_groups()
+            aws.list_security_groups()
         elif option == 4:
             # Read the input parameters
             instance_name = input('Instance name: ')
@@ -60,55 +60,55 @@ def main():
             sg_name = input('Security group: ')
 
             # Check if security group exists
-            if aws_object.security_group_exists(sg_name) == False:
+            if aws.security_group_exists(sg_name) == False:
                 print('The security group does not exist')
                 continue
             
             # Create the instance
-            aws_object.create_instance(ami, min_count, instance_type, key_name, instance_name, sg_name)
+            aws.create_instance(ami, min_count, instance_type, key_name, instance_name, sg_name)
         elif option == 5:
             instance_name = input('Instance name: ')
-            aws_object.start_instance(instance_name)
+            aws.start_instance(instance_name)
         elif option == 6:
             instance_name = input('Instance name: ')
-            aws_object.stop_instance(instance_name)
+            aws.stop_instance(instance_name)
         elif option == 7:
             instance_name = input('Instance name: ')
-            aws_object.terminate_instance(instance_name)
+            aws.terminate_instance(instance_name)
         elif option == 8:
-            aws_object.list_instances()
+            aws.list_instances()
         elif option == 9:
-            aws_object.start_instances()
+            aws.start_instances()
         elif option == 10:
-            aws_object.stop_instances()
+            aws.stop_instances()
         elif option == 11:
-            aws_object.terminate_instances()
+            aws.terminate_instances()
         elif option == 12:
             # Get instance ID from instance name
             instance_name = input('Instance name: ')
-            instance_id = aws_object.get_instance_id(instance_name)
+            instance_id = aws.get_instance_id(instance_name)
 
             if instance_id == None:
                 print('There is no instance with that name')
                 continue
 
             # Allocate and associate Elastic IP
-            elastic_ip = aws_object.allocate_elastic_ip()
-            aws_object.associate_elastic_ip(elastic_ip, instance_id)
+            elastic_ip = aws.allocate_elastic_ip()
+            aws.associate_elastic_ip(elastic_ip, instance_id)
         elif option == 13:
             # Get instance ID from instance name
             instance_name = input('Instance name: ')
-            instance_id = aws_object.get_instance_id(instance_name)
+            instance_id = aws.get_instance_id(instance_name)
 
             if instance_id == None:
                 print('There is no instance with that name')
                 continue
 
             # Get Elastic IP from instance ID
-            elastic_ip = aws_object.get_instance_public_ip(instance_id)
+            elastic_ip = aws.get_instance_public_ip(instance_id)
 
             # Release Elastic IP
-            aws_object.release_elastic_ip(elastic_ip)
+            aws.release_elastic_ip(elastic_ip)
         elif option == 14:
             print('Bye!')
         else:
