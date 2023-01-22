@@ -1,4 +1,4 @@
-import aws
+from common import aws_resource_functions as aws
 
 def show_menu():
     print('\n-- Security Group --')
@@ -110,8 +110,6 @@ def main():
             print('Bye!')
         else:
             print('Invalid option')
-        
-        input('\nPress any key to continue...')
 
 if __name__ == "__main__":
     main()

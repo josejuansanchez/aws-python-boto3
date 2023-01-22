@@ -1,4 +1,4 @@
-from aws import AWS
+from common.aws_resource_class import AWS
 
 def show_menu():
     print('\n-- Security Group --')
@@ -114,7 +114,5 @@ def main():
         else:
             print('Invalid option')
         
-        input('\nPress any key to continue...')
-
 if __name__ == "__main__":
     main()
