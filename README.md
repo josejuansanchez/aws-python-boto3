@@ -128,8 +128,8 @@ Escriba un script de Python para crear una instancia EC2 que tengas las siguient
 
 ### Ejercicio 3
 
-- Crea un script para crear la infraestructura de la **práctica 9**.
-- Crea un script para eliminar la infraestructura de la **práctica 9**.
+- Crea un script para crear la infraestructura de la práctica propuesta por el profesor.
+- Crea un script para eliminar la infraestructura de la práctica propuesta por el profesor.
 
 ### Ejercicio 4
 
